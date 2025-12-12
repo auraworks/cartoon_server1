@@ -1,0 +1,20 @@
+[Unit]
+Description=Face Swap API Service
+After=network.target
+
+[Service]
+Type=notify
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/your_project_directory
+Environment=PATH=/home/ubuntu/your_project_directory/venv/bin
+ExecStart=/home/ubuntu/your_project_directory/venv/bin/gunicorn -c gunicorn.conf.py app:app
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=always
+RestartSec=10
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target 
